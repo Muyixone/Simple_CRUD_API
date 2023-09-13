@@ -7,7 +7,7 @@ const CreatePerson = async (personData) => {
     await person.save();
     return person;
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 

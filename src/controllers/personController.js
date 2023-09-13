@@ -5,17 +5,19 @@ const CreatePerson = async (req, res) => {
   try {
     const person = await personService.CreatePerson({ ...req.body });
 
-    if (!person) {
-      return;
-    }
-
-    return res.json({
+    return res.status(200).json({
       mesg: 'person created',
       person,
-      status: 200,
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    if (error.name === 'ValidationError') {
+      let errors = {};
+      Object.keys(error.errors).forEach((key) => {
+        errors[key] = error.errors[key].message;
+      });
+      return res.status(400).json(errors);
+    }
+    res.status(500).json({ error: 'Something went wrong' });
   }
 };
 
