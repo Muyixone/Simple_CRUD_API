@@ -5,12 +5,17 @@ const CreatePerson = async (req, res) => {
   try {
     const person = await personService.CreatePerson({ ...req.body });
 
+    if (!person) {
+      return;
+    }
+
     return res.json({
       mesg: 'person created',
       person,
+      status: 200,
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -33,7 +38,7 @@ const getPerson = async (req, res) => {
       person,
     });
   } catch (error) {
-    console.log(error);
+    throw new Error();
   }
 };
 
@@ -52,11 +57,14 @@ const updateOnePersonInfo = async (req, res) => {
   });
 };
 
-const deleteOnePerson = (req, res) => {
-  const person = personService.deleteOnePerson();
-  res.json({
-    mesg: 'person deleted',
-  });
+const deleteOnePerson = async (req, res) => {
+  const { user_id } = req.params;
+  try {
+    await personService.deleteOnePerson(user_id);
+    res.json({
+      mesg: 'person deleted',
+    });
+  } catch (error) {}
 };
 
 module.exports = {
