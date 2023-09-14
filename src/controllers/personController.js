@@ -17,6 +17,7 @@ const CreatePerson = async (req, res) => {
       });
       return res.status(400).json(errors);
     }
+
     res.status(500).json({ error: 'Something went wrong' });
   }
 };
@@ -87,11 +88,6 @@ const deleteOnePerson = async (req, res) => {
   try {
     const person = await personService.deleteOnePerson(user_id);
 
-    if (!person) {
-      return res.status(404).json({
-        message: 'Person not found',
-      });
-    }
     res.json({
       mesg: 'person deleted',
     });

@@ -51,9 +51,7 @@ const updateOnePersonInfo = async (personId, newInfo) => {
 const deleteOnePerson = async (personId) => {
   try {
     const person = await personModel.findById({ _id: personId });
-    if (!person) {
-      return;
-    }
+
     await personModel.deleteOne({ _id: personId });
     return;
   } catch (error) {}
