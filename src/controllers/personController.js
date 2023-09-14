@@ -36,11 +36,17 @@ const getPerson = async (req, res) => {
 
   try {
     const person = await personService.getPerson(user_id);
+
+    if (!person) {
+      return res.status(404).json({
+        message: 'Person not found',
+      });
+    }
     res.json({
       person,
     });
   } catch (error) {
-    throw new Error();
+    return res.status(500).json({ errorMessage: 'Something went wrong' });
   }
 };
 
@@ -51,12 +57,20 @@ const updateOnePersonInfo = async (req, res) => {
     return console.log(`No item with ${user_id} found`);
     // throw new notFoundError(`No item found with id ${stateId}`);
   }
-  const person = await personService.updateOnePersonInfo(user_id, req.body);
+  try {
+    const person = await personService.updateOnePersonInfo(user_id, req.body);
 
-  res.json({
-    mesg: 'person  info updated',
-    person,
-  });
+    if (!person) {
+      return res.status(404).json({
+        message: 'Person not found',
+      });
+    }
+
+    res.json({
+      mesg: 'person  info updated',
+      person,
+    });
+  } catch (error) {}
 };
 
 const deleteOnePerson = async (req, res) => {

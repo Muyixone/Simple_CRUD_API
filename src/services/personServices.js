@@ -15,20 +15,16 @@ const getPerson = async (personId) => {
   try {
     const person = await personModel.findById({ _id: personId });
 
-    if (!person) {
-      throw new Error('Person not found');
-    }
-
     return person;
   } catch (error) {
-    throw new Error({ status: 500, message: error.message });
+    throw error;
   }
 };
+
 const updateOnePersonInfo = async (personId, newInfo) => {
   try {
     const person = await personModel.findById({ _id: personId });
     if (!person) {
-      console.log('Person not found');
       return null;
     }
 
