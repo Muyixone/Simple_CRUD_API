@@ -1,5 +1,6 @@
 const personModel = require('../models/personModel');
 
+// Create person service
 const CreatePerson = async (personData) => {
   const person = new personModel({ ...personData });
 
@@ -11,15 +12,23 @@ const CreatePerson = async (personData) => {
   }
 };
 
+//Get one person
+
 const getPerson = async (personId) => {
   try {
     const person = await personModel.findById({ _id: personId });
+
+    if (!person) {
+      return;
+    }
 
     return person;
   } catch (error) {
     throw error;
   }
 };
+
+// Update person service
 
 const updateOnePersonInfo = async (personId, newInfo) => {
   try {
@@ -34,7 +43,7 @@ const updateOnePersonInfo = async (personId, newInfo) => {
     await person.save();
     return person;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 
@@ -43,13 +52,12 @@ const deleteOnePerson = async (personId) => {
   try {
     const person = await personModel.findById({ _id: personId });
     if (!person) {
-      console.log('Person not found');
       return;
     }
     await personModel.deleteOne({ _id: personId });
     return;
   } catch (error) {}
-  return;
+  throw error;
 };
 
 module.exports = {

@@ -70,17 +70,34 @@ const updateOnePersonInfo = async (req, res) => {
       mesg: 'person  info updated',
       person,
     });
-  } catch (error) {}
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      let errors = {};
+      Object.keys(error.errors).forEach((key) => {
+        errors[key] = error.errors[key].message;
+      });
+      return res.status(400).json(errors);
+    }
+    res.status(500).json({ error: 'Something went wrong' });
+  }
 };
 
 const deleteOnePerson = async (req, res) => {
   const { user_id } = req.params;
   try {
-    await personService.deleteOnePerson(user_id);
+    const person = await personService.deleteOnePerson(user_id);
+
+    if (!person) {
+      return res.status(404).json({
+        message: 'Person not found',
+      });
+    }
     res.json({
       mesg: 'person deleted',
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({ error: 'Something went wrong' });
+  }
 };
 
 module.exports = {
