@@ -63,7 +63,7 @@ MONGODB_URI = your_mongodb_uri;
 
 &bull; Method: GET
 
-&bull; URL_PARAMETER:
+&bull; URL_Parameter:
 
 ![Get person](./gifs/get_person.gif 'Get Person')
 
@@ -73,7 +73,7 @@ MONGODB_URI = your_mongodb_uri;
 
 &bull; Method: PATCH
 
-&bull; URL_PARAMETER:
+&bull; URL_Parameter & Body:
 
 ![update person](./gifs/update_person.gif 'update Person')
 
@@ -83,32 +83,13 @@ MONGODB_URI = your_mongodb_uri;
 
 &bull; Method: DELETE
 
-&bull; URL_PARAMETER:
+&bull; URL_Parameter:
 
 ![delete person](./gifs/delete_person.gif 'delete person')
 
-## Contributing
+## Deployment
 
-Contributions to the Simple_CRUD_API are welcome! If you find any issues or want to add new features, please submit a pull request. Make sure to follow the existing code style and include relevant tests. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LICENSE -->
-
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+You can host your application on any web hosting platform that supports Node.
 
 <!-- CONTACT -->
 
