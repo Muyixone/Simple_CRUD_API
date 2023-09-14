@@ -8,6 +8,10 @@ const personSchema = Schema({
     unique: true,
     required: true,
     trim: true,
+    validate: {
+      validator: (value) => /^[A-Za-z0-9\s]+$/.test(value), // Only allow alphanumeric values
+      message: 'Name can only contain letters, numbers, and spaces',
+    },
   },
 });
 
